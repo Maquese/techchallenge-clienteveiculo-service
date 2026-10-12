@@ -23,15 +23,16 @@ namespace IOC;
             //     throw new InvalidOperationException("A connection string 'DefaultConnection' must be configured.");
             // }
             
-            // Console.WriteLine($"Using connection string: {connectionString}");
-
+            // // Console.WriteLine($"Using connection string: {connectionString}");
+            // string connStr = "Server=localhost;Port=3306;Database=meu_db;User=root;Password=senha_root;";
+            string connStr = "Server=mysql-clienteveiculo;Port=3306;Database=ClienteVeiculo;User=appuser;Password=clienteveiculoservice;";
+Console.WriteLine($"Using connection string: {connStr}");
             services.AddDbContext<EFContext>(options =>
-                options.UseInMemoryDatabase("AutoReparaDB"));
-
-            //using var serviceProvider = services.BuildServiceProvider();
-            //using var scope = serviceProvider.CreateScope();
-            //var dbContext = scope.ServiceProvider.GetRequiredService<EFContext>();
-            //dbContext.Database.Migrate();
+                options.UseMySQL(connStr));
+            using var serviceProvider = services.BuildServiceProvider();
+            using var scope = serviceProvider.CreateScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<EFContext>();
+            dbContext.Database.Migrate();
 
 
             services.AddTransient<ClienteRepository, ClienteRepositoryImp>();
