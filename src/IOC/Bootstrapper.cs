@@ -24,8 +24,8 @@ namespace IOC;
             // }
             
             // // Console.WriteLine($"Using connection string: {connectionString}");
-            // string connStr = "Server=localhost;Port=3306;Database=meu_db;User=root;Password=senha_root;";
-            string connStr = "Server=mysql-clienteveiculo;Port=3306;Database=ClienteVeiculo;User=appuser;Password=clienteveiculoservice;";
+             string connStr = "Server=localhost;Port=3307;Database=ClienteVeiculo;User=appuser;Password=clienteveiculoservice;";
+           // string connStr = "Server=mysql-clienteveiculo;Port=3307;Database=ClienteVeiculo;User=appuser;Password=clienteveiculoservice;";
 Console.WriteLine($"Using connection string: {connStr}");
             services.AddDbContext<EFContext>(options =>
                 options.UseMySQL(connStr));
@@ -45,5 +45,6 @@ Console.WriteLine($"Using connection string: {connStr}");
             services.AddScoped<InativarClienteHandler>();
             services.AddScoped<InativarVeiculoClienteHandler>();
             services.AddScoped<VerificaCadastroClienteHandler>();
+            services.AddScoped<BuscarVeiculoIdClienteHandler>();
         }
     }

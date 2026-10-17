@@ -50,9 +50,16 @@ namespace AutoReparaAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> BuscarVeiculo([FromServices]BuscarVeiculoPlacaClienteHandler buscarVeiculoPlacaClienteHandler, [FromQuery]string placa)
+        public async Task<IActionResult> BuscarVeiculoPorPlaca([FromServices]BuscarVeiculoPlacaClienteHandler buscarVeiculoPlacaClienteHandler, [FromQuery]string placa)
         {
             var veiculo = await buscarVeiculoPlacaClienteHandler.Handle(placa);
+            return Ok(veiculo);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> BuscarVeiculoPorId([FromServices]BuscarVeiculoIdClienteHandler buscarVeiculoIdClienteHandler, [FromQuery]int id)
+        {
+            var veiculo = await buscarVeiculoIdClienteHandler.Handle(id);
             return Ok(veiculo);
         }
 
@@ -67,5 +74,7 @@ namespace AutoReparaAPI.Controllers
         {
             return Ok(await inativarVeiculoClienteHandler.Handle(id));
         }
+
+
     }
 }

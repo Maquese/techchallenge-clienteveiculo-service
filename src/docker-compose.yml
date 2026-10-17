@@ -1,5 +1,5 @@
 services:
-  mysql:
+  mysql-cliente:
     container_name: mysql-clienteveiculo
     image: mysql:8.0
     restart: unless-stopped
@@ -9,7 +9,7 @@ services:
       MYSQL_USER: appuser
       MYSQL_PASSWORD: clienteveiculoservice
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
