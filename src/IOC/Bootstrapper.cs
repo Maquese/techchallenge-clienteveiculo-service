@@ -46,5 +46,6 @@ Console.WriteLine($"Using connection string: {connStr}");
             services.AddScoped<InativarVeiculoClienteHandler>();
             services.AddScoped<VerificaCadastroClienteHandler>();
             services.AddScoped<BuscarVeiculoIdClienteHandler>();
+            services.AddScoped<BuscarVeiculosDoClienteHandler>();
         }
     }

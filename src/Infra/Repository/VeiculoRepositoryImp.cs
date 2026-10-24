@@ -11,6 +11,11 @@ public class VeiculoRepositoryImp : BaseRepositoryImp<Veiculo>, VeiculoRepositor
         
     }
 
+    public async Task<IList<Veiculo>> BuscarPorCliente(int idCliente)
+    {
+        return await _context.Veiculos.Where(x => x.ClienteId == idCliente && x.Ativo).ToListAsync();
+    }
+
     public async Task<Veiculo> BuscarPorPlaca(string placa)
     {
         return await _context.Veiculos.FirstOrDefaultAsync(v => v.Placa.Valor == new Domain.VOs.PlacaVO(placa).Valor);

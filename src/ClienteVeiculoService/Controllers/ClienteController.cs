@@ -63,6 +63,14 @@ namespace AutoReparaAPI.Controllers
             return Ok(veiculo);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> BuscarVeiculosPorCliente([FromServices]BuscarVeiculosDoClienteHandler buscarVeiculoIdClienteHandler, [FromQuery]int idCliente)
+        {
+            var veiculo = await buscarVeiculoIdClienteHandler.Handle(idCliente);
+            return Ok(veiculo);
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> AtualizarVeiculo([FromServices]AtualizarVeiculoClienteHandler atualizarVeiculoClienteHandler, [FromBody]UpdateVeiculoRequest veiculo)
         {           
