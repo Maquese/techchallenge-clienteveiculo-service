@@ -14,21 +14,21 @@ namespace IOC;
         {
             //services.AddScoped<AuthService>();
 
-            // var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection")
-            //     ?? configuration["ConnectionStrings:DefaultConnection"]
-            //     ?? configuration.GetConnectionString("DefaultConnection");
+            var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection")
+                ?? configuration["ConnectionStrings:DefaultConnection"]
+                ?? configuration.GetConnectionString("DefaultConnection");
 
-            // if (string.IsNullOrWhiteSpace(connectionString))
-            // {
-            //     throw new InvalidOperationException("A connection string 'DefaultConnection' must be configured.");
-            // }
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                throw new InvalidOperationException("A connection string 'DefaultConnection' must be configured.");
+            }
             
-            // // Console.WriteLine($"Using connection string: {connectionString}");
-             string connStr = "Server=localhost;Port=3307;Database=ClienteVeiculo;User=appuser;Password=clienteveiculoservice;";
-           // string connStr = "Server=mysql-clienteveiculo;Port=3307;Database=ClienteVeiculo;User=appuser;Password=clienteveiculoservice;";
-Console.WriteLine($"Using connection string: {connStr}");
+             Console.WriteLine($"Using connection string: {connectionString}");
+             //string connStr = "Server=localhost;Port=3307;Database=ClienteVeiculo;User=appuser;Password=clienteveiculoservice;";
+            //string connStr = "Server=clienteveiculo-mysql.cwpllpe9avab.us-east-1.rds.amazonaws.com;Port=3306;Database=ClienteVeiculo;User=root;Password=minha-senha;";
+            //Console.WriteLine($"Using connection string: {connStr}");
             services.AddDbContext<EFContext>(options =>
-                options.UseMySQL(connStr));
+                options.UseMySQL(connectionString));
             using var serviceProvider = services.BuildServiceProvider();
             using var scope = serviceProvider.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<EFContext>();
