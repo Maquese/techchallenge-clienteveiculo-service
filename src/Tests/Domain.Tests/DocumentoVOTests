@@ -1,0 +1,99 @@
+using System;
+using System.Reflection;
+using Xunit;
+using Domain.VOs;
+using Domain.Exceptions;
+
+namespace Domain.Tests
+{
+    public class DocumentoVOTests
+    {
+        // -------------------------
+        // Helpers para reflexão
+        // -------------------------
+        private static object CreateProtectedInstance()
+        {
+            var ctor = typeof(DocumentoVO).GetConstructor(
+                BindingFlags.Instance | BindingFlags.NonPublic,
+                null, Type.EmptyTypes, null);
+            return ctor.Invoke(null);
+        }
+
+        private static bool InvokeValidarCpf(string? numero)
+        {
+            var instance = CreateProtectedInstance();
+            var method = typeof(DocumentoVO).GetMethod("ValidarCpf", BindingFlags.NonPublic | BindingFlags.Instance);
+            return (bool)method.Invoke(instance, new object[] { numero! });
+        }
+
+        private static bool InvokeValidarCnpj(string? numero)
+        {
+            var instance = CreateProtectedInstance();
+            var method = typeof(DocumentoVO).GetMethod("ValidarCnpj", BindingFlags.NonPublic | BindingFlags.Instance);
+            return (bool)method.Invoke(instance, new object[] { numero! });
+        }
+
+        // -------------------------
+        // Testes do ValidarCpf
+        // -------------------------
+        [Fact] public void ValidarCpf_Null_DeveRetornarFalse() => Assert.False(InvokeValidarCpf(null));
+        [Fact] public void ValidarCpf_Whitespace_DeveRetornarFalse() => Assert.False(InvokeValidarCpf("   "));
+        [Fact] public void ValidarCpf_TamanhoIncorreto_DeveRetornarFalse() => Assert.False(InvokeValidarCpf("12345"));
+        [Fact] public void ValidarCpf_TodosDigitosIguais_DeveRetornarFalse() => Assert.False(InvokeValidarCpf("11111111111"));
+        [Fact] public void ValidarCpf_CpfValido_DeveRetornarTrue() => Assert.True(InvokeValidarCpf("11144477735"));
+        [Fact] public void ValidarCpf_CpfInvalido_DeveRetornarFalse() => Assert.False(InvokeValidarCpf("11144477734"));
+
+        // -------------------------
+        // Testes do ValidarCnpj
+        // -------------------------
+        [Fact] public void ValidarCnpj_Null_DeveRetornarFalse() => Assert.False(InvokeValidarCnpj(null));
+        [Fact] public void ValidarCnpj_Whitespace_DeveRetornarFalse() => Assert.False(InvokeValidarCnpj("   "));
+        [Fact] public void ValidarCnpj_TamanhoIncorreto_DeveRetornarFalse() => Assert.False(InvokeValidarCnpj("12345678"));
+        [Fact] public void ValidarCnpj_TodosDigitosIguais_DeveRetornarFalse() => Assert.False(InvokeValidarCnpj("11111111111111"));
+        [Fact] public void ValidarCnpj_CnpjValido_DeveRetornarTrue() => Assert.True(InvokeValidarCnpj("11444777000161"));
+        [Fact] public void ValidarCnpj_CnpjInvalido_DeveRetornarFalse() => Assert.False(InvokeValidarCnpj("11444777000162"));
+
+        // -------------------------
+        // Testes via construtor (fluxo real)
+        // -------------------------
+        [Fact]
+        public void CriarDocumentoVO_CpfValido_DeveSerCpf()
+        {
+            var doc = new DocumentoVO("111.444.777-35");
+            Assert.Equal("11144477735", doc.Numero);
+            Assert.Equal("CPF", doc.Tipo);
+        }
+
+        [Fact]
+        public void CriarDocumentoVO_CnpjValido_DeveSerCnpj()
+        {
+            var doc = new DocumentoVO("11.444.777/0001-61");
+            Assert.Equal("11444777000161", doc.Numero);
+            Assert.Equal("CNPJ", doc.Tipo);
+        }
+
+        [Fact]
+        public void CriarDocumentoVO_CpfInvalido_DeveLancarDomainException()
+        {
+            Assert.Throws<DomainException>(() => new DocumentoVO("12345678900"));
+        }
+
+        [Fact]
+        public void CriarDocumentoVO_CnpjInvalido_DeveLancarDomainException()
+        {
+            Assert.Throws<DomainException>(() => new DocumentoVO("12345678901234"));
+        }
+
+        [Fact]
+        public void CriarDocumentoVO_EntradaVazia_DeveLancarDomainException()
+        {
+            Assert.Throws<DomainException>(() => new DocumentoVO(""));
+        }
+
+        [Fact]
+        public void CriarDocumentoVO_EntradaWhitespace_DeveLancarDomainException()
+        {
+            Assert.Throws<DomainException>(() => new DocumentoVO("   "));
+        }
+    }
+}
