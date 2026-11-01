@@ -2,9 +2,9 @@
 <CoverageSession>
   <Summary numSequencePoints="414" visitedSequencePoints="369" numBranchPoints="82" visitedBranchPoints="56" sequenceCoverage="89.13" branchCoverage="68.29" maxCyclomaticComplexity="89" minCyclomaticComplexity="66" visitedClasses="34" numClasses="34" visitedMethods="79" numMethods="91" />
   <Modules>
-    <Module hash="6EC5B561-D365-4DA4-B542-46BCF9C0A3A8">
+    <Module hash="FA4F6611-22B9-41A1-A551-B94AE3CF4C5B">
       <ModulePath>Application.dll</ModulePath>
-      <ModuleTime>2026-11-01T05:14:14</ModuleTime>
+      <ModuleTime>2026-11-01T05:23:26</ModuleTime>
       <ModuleName>Application</ModuleName>
       <Files>
         <File uid="1" fullPath="C:\Users\kenne\OneDrive\Desktop\techchallenge-clienteveiculo-service\src\Application\UseCases\Clientes\AdicionarClienteHandler.cs" />
@@ -918,9 +918,9 @@
         </Class>
       </Classes>
     </Module>
-    <Module hash="EA080B79-4988-4083-91C6-046803DDCB55">
+    <Module hash="C816183F-BA16-4B9B-9EF2-771717DEACE5">
       <ModulePath>Domain.dll</ModulePath>
-      <ModuleTime>2026-11-01T05:14:14</ModuleTime>
+      <ModuleTime>2026-11-01T05:23:26</ModuleTime>
       <ModuleName>Domain</ModuleName>
       <Files>
         <File uid="16" fullPath="C:\Users\kenne\OneDrive\Desktop\techchallenge-clienteveiculo-service\src\Domain\VOs\CelularVO.cs" />
