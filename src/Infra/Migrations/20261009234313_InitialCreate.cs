@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore.Migrations;
 using MySql.EntityFrameworkCore.Metadata;
 
 #nullable disable
@@ -6,6 +7,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace Infra.Migrations
 {
     /// <inheritdoc />
+    [ExcludeFromCodeCoverage]
     public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
