@@ -19,11 +19,6 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v4
 
-      - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '10.0.x'
-
       - name: Restaurar dependências
         working-directory: src
         run: dotnet restore ClienteVeiculoServiceSolution.slnx
