@@ -5,9 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Application.UseCases.Clientes;
+using System.Diagnostics.CodeAnalysis;
 
 namespace IOC;
 
+[ExcludeFromCodeCoverage]
  public static class BootStrapper
     {
         public static void AddAppServices(this IServiceCollection services, IConfiguration configuration)

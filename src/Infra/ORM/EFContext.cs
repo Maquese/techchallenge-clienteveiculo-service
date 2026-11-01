@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Domain.VOs;
 using Domain.Entidades;
+using System.Diagnostics.CodeAnalysis;
 namespace Infra;
 
+[ExcludeFromCodeCoverage]
 public class EFContext : DbContext
 {
 

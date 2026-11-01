@@ -1,8 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace Infra;
 
+[ExcludeFromCodeCoverage]
 public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<EFContext>
 {
     public EFContext CreateDbContext(string[] args)
