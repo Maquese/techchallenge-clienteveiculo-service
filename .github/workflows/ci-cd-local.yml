@@ -37,7 +37,7 @@ jobs:
         working-directory: src
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL || 'http://host.docker.internal:9000' }}
+          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL || 'http://localhost:9000' }}
         run: |
           dotnet sonarscanner begin \
             /k:"ClienteVeiculo" \
