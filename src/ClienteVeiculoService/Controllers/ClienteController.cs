@@ -23,7 +23,7 @@ namespace AutoReparaAPI.Controllers
             return Ok(id);
         }
 
-        [HttpPost]
+        [HttpPost] 
         public async Task<IActionResult> AtualizarCliente([FromServices]AtualizarClienteHandler clienteAppService, [FromBody]UpdateClienteRequest cliente)
         {            
             return Ok(await clienteAppService.Handle(cliente));
