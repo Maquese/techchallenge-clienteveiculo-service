@@ -25,8 +25,8 @@ namespace IOC;
                 throw new InvalidOperationException("A connection string 'DefaultConnection' must be configured.");
             }
             
-             Console.WriteLine($"Using connection string: {connectionString}");
-             //string connStr = "Server=localhost;Port=3307;Database=ClienteVeiculo;User=appuser;Password=clienteveiculoservice;";
+          Console.WriteLine($"Using connection string: {connectionString}");
+           // string connectionString = "Server=localhost;Port=3307;Database=ClienteVeiculo;User=appuser;Password=clienteveiculoservice;";
             //string connStr = "Server=clienteveiculo-mysql.cwpllpe9avab.us-east-1.rds.amazonaws.com;Port=3306;Database=ClienteVeiculo;User=root;Password=minha-senha;";
             //Console.WriteLine($"Using connection string: {connStr}");
             services.AddDbContext<EFContext>(options =>
